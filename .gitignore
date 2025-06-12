@@ -3,5 +3,5 @@
 /*/target
 .idea
 target/
-bap-adapter/app/logs/
+/app/logs/
 .vscode
