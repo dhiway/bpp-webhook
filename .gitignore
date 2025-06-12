@@ -1,0 +1,7 @@
+.autometrics
+/*/.idea
+/*/target
+.idea
+target/
+/app/logs/
+.vscode
