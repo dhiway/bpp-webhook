@@ -1,0 +1,3 @@
+{"timestamp":"2025-06-12T11:18:06.836904Z","level":"ERROR","fields":{"message":"Error: Configuration path not provided. Usage: cargo run -- <config_path>"},"target":"bap_adapter::config"}
+{"timestamp":"2025-06-12T11:18:24.841395Z","level":"INFO","fields":{"message":"🚀 Starting BAP-ADAPTER server on \"0.0.0.0:5005\""},"target":"bap_adapter::http::http_server"}
+{"timestamp":"2025-06-12T11:42:06.92446Z","level":"INFO","fields":{"message":"🚀 Starting BAP-ADAPTER server on \"0.0.0.0:5005\""},"target":"bap_adapter::http::http_server"}
