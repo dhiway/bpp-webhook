@@ -10,8 +10,16 @@ pub struct HttpConfig {
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct Bpp {
+    pub id: String,
+    pub caller_uri: String,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct AppConfig {
     debug: bool,
+    pub connect_bpp_reference: bool,
+    pub bpp: Bpp,
     pub http: HttpConfig,
 }
 

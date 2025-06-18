@@ -1,5 +1,8 @@
 debug: true
-
+connect_bpp_reference: false
+bpp:
+   id: "bpp1.dhiway.com"
+   caller_uri: "https://beckn-adapter.dhiway.net/bpp/caller"
 http:
   address: 0.0.0.0
   port: 5005

@@ -1,13 +1,16 @@
 use crate::config::AppConfig;
-use axum::{Json, Router, response::IntoResponse, routing::get};
+use axum::{
+    Json, Router,
+    extract::{Path, State},
+    response::IntoResponse,
+    routing::{get, post},
+};
 use chrono::Utc;
-use serde::Serialize;
+use std::sync::Arc;
+use tracing::info;
 
-#[derive(Serialize)]
-struct HealthResponse {
-    status: &'static str,
-    timestamp: String,
-}
+use crate::models::webhook::{Ack, AckResponse, AckStatus, HealthResponse, WebhookPayload};
+use crate::workers::processor::spawn_processing_task;
 
 async fn health_check() -> impl IntoResponse {
     let response = HealthResponse {
@@ -18,6 +21,32 @@ async fn health_check() -> impl IntoResponse {
     Json(response)
 }
 
-pub fn create_routes(_config: AppConfig) -> Router {
-    Router::new().route("/health", get(health_check))
+pub async fn webhook_handler(
+    Path(action): Path<String>,
+    State(config): State<Arc<AppConfig>>,
+    Json(payload): Json<WebhookPayload>,
+) -> impl IntoResponse {
+    info!(
+        "webhook called: action = {:?}, context = {:?}, message = {:?}",
+        action, payload.context, payload.message
+    );
+
+    spawn_processing_task(payload.context, payload.message, action, config);
+
+    let ack = AckResponse {
+        message: AckStatus {
+            ack: Ack { status: "ACK" },
+        },
+    };
+
+    Json(ack)
+}
+
+pub fn create_routes(config: AppConfig) -> Router {
+    let shared_config = Arc::new(config);
+
+    Router::new()
+        .route("/health", get(health_check))
+        .route("/webhook/{action}", post(webhook_handler))
+        .with_state(shared_config)
 }

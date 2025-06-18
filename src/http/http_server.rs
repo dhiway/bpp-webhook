@@ -11,7 +11,7 @@ pub async fn start_http_server(
 > {
     let http_addr = format!("{}:{}", config.http.address, config.http.port);
     let listener = tokio::net::TcpListener::bind(http_addr.clone()).await?;
-    info!("🚀 Starting BAP-ADAPTER server on {:?}", http_addr);
+    info!("🚀 Starting BPP-WEBHOOK server on {:?}", http_addr);
 
     let http_server = tokio::spawn(run_http_server(listener, shutdown_rx, config.clone()));
 

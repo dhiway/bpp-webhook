@@ -1,2 +1,2 @@
-# bap-adapter
-backend service for bap client
+# bpp-webhokk
+bpp-webhook
