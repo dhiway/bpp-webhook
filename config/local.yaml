@@ -5,4 +5,4 @@ bpp:
    caller_uri: "https://beckn-adapter.dhiway.net/bpp/caller"
 http:
   address: 0.0.0.0
-  port: 5005
+  port: 3009

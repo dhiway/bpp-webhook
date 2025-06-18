@@ -3,8 +3,8 @@ use crate::models::webhook::Context;
 use crate::utils::http_client::post_json;
 use crate::utils::mock_responses::load_mock_response;
 use anyhow::Result;
-use serde_json::Value;
 use serde_json::json;
+use serde_json::Value;
 use std::sync::Arc;
 use tracing::info;
 
@@ -49,6 +49,6 @@ pub async fn send_to_bpp_caller(
     config: Arc<AppConfig>,
 ) -> Result<()> {
     let bpp_url = &config.bpp.caller_uri;
-    let full_url = format!("{}/{}", bpp_url, action);
+    let full_url = format!("{}/on_{}", bpp_url, action);
     post_json(&full_url, payload).await
 }

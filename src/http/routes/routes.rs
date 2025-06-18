@@ -1,9 +1,9 @@
 use crate::config::AppConfig;
 use axum::{
-    Json, Router,
     extract::{Path, State},
     response::IntoResponse,
     routing::{get, post},
+    Json, Router,
 };
 use chrono::Utc;
 use std::sync::Arc;
