@@ -14,14 +14,14 @@ pub fn generate_response(
     message: Value,
     config: &AppConfig,
 ) -> Value {
-    if config.connect_bpp_reference {
+    if !config.use_mock_bpp_response {
         // TODO: Add logic for getting dat from bpp db/reference  here
         json!({
             "context": context,
             "message": message
         })
     } else {
-        info!("Fallback to mock response: `connect_bpp_reference` is disabled in configuration");
+        info!("Fallback to mock response: ...");
         // Fallback to mock response
         let mut mock = load_mock_response(action).unwrap_or_else(|| {
             json!({

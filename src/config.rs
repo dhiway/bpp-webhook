@@ -18,7 +18,7 @@ pub struct Bpp {
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct AppConfig {
     debug: bool,
-    pub connect_bpp_reference: bool,
+    pub use_mock_bpp_response: bool,
     pub bpp: Bpp,
     pub http: HttpConfig,
 }

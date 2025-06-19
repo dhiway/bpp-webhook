@@ -1,5 +1,5 @@
 debug: true
-connect_bpp_reference: false
+use_mock_bpp_response: true
 bpp:
    id: "bpp1.dhiway.com"
    caller_uri: "https://beckn-adapter.dhiway.net/bpp/caller"

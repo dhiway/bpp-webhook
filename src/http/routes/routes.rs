@@ -30,6 +30,15 @@ pub async fn webhook_handler(
         "webhook called: action = {:?}, context = {:?}, message = {:?}",
         action, payload.context, payload.message
     );
+    if action.contains("on") {
+        info!("Skipping processing since action contains 'on': {:?}", action);
+        let ack = AckResponse {
+            message: AckStatus {
+                ack: Ack { status: "ACK" },
+            },
+        };
+        return Json(ack);
+    }
 
     spawn_processing_task(payload.context, payload.message, action, config);
 
